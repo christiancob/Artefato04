@@ -19,15 +19,16 @@ public class jfrmListaSocios extends javax.swing.JFrame {
     /**
      * Creates new form jfrmListaSócios
      */
+    LimparTodosCampos limpar = new LimparTodosCampos();
     public jfrmListaSocios() {
         initComponents();
         //preencherTabelaUsuario();
-        this.setSize(750, 500);
+        this.setSize(800, 550);
         setLocationRelativeTo(null);
         // preencherTabelaUsuario();
         LayoutPadrao lp = new LayoutPadrao();
         lp.ativarLayoutPadrao();
-        preencherTabelaProdutosOrdenAlf();
+        preencherTabelaProdutos();
     }
 
     /**
@@ -45,7 +46,19 @@ public class jfrmListaSocios extends javax.swing.JFrame {
         jbtnVoltar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        jComboBoxOrdena = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jtxtNomeProduto = new javax.swing.JTextField();
+        jTxtNomeFabricante = new javax.swing.JTextField();
+        jTxtValidade = new javax.swing.JTextField();
+        jTxtQuantidade = new javax.swing.JTextField();
+        jTxtPrecoUnitario = new javax.swing.JTextField();
+        btnCadastrar = new javax.swing.JButton();
+        lblListaDeProdutos = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Clube de Campo-Lista de Sócios");
@@ -56,18 +69,18 @@ public class jfrmListaSocios extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID Produto", "Fabricante", "Data de Validade", "Nome"
+                "ID Produto", "Nome", "Fabricante", "Data de Validade", "Quantidade", "Preço Unitário"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 90, 710, 167);
+        jScrollPane1.setBounds(30, 250, 710, 167);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jLabel1.setText("Lista de Produtos");
+        jLabel1.setText("Cadastrar Produto");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(300, 20, 180, 22);
+        jLabel1.setBounds(340, 50, 180, 22);
 
         jbtnVoltar.setText("Voltar");
         jbtnVoltar.addActionListener(new java.awt.event.ActionListener() {
@@ -76,11 +89,11 @@ public class jfrmListaSocios extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jbtnVoltar);
-        jbtnVoltar.setBounds(660, 430, 61, 23);
+        jbtnVoltar.setBounds(590, 450, 140, 23);
 
         jButton2.setText("Salvar");
         getContentPane().add(jButton2);
-        jButton2.setBounds(590, 430, 63, 23);
+        jButton2.setBounds(450, 450, 130, 23);
 
         jButton1.setText("Excluir");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -89,16 +102,62 @@ public class jfrmListaSocios extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(513, 430, 70, 23);
+        jButton1.setBounds(300, 450, 140, 23);
 
-        jButton3.setText("Cadastrar produto");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        jComboBoxOrdena.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ordenar por:", "Data de Validade", "Nome", "Quantidade" }));
+        jComboBoxOrdena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                jComboBoxOrdenaActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton3);
-        jButton3.setBounds(590, 270, 130, 23);
+        getContentPane().add(jComboBoxOrdena);
+        jComboBoxOrdena.setBounds(30, 220, 110, 20);
+
+        jLabel3.setText("Nome");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(40, 80, 40, 14);
+
+        jLabel4.setText("Fabricante");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(280, 80, 80, 14);
+
+        jLabel5.setText("Validade");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(560, 80, 70, 14);
+
+        jLabel6.setText("Quantidade");
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(16, 120, 70, 20);
+
+        jLabel7.setText("Preço Unitário");
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(277, 120, 80, 14);
+        getContentPane().add(jtxtNomeProduto);
+        jtxtNomeProduto.setBounds(100, 80, 160, 20);
+        getContentPane().add(jTxtNomeFabricante);
+        jTxtNomeFabricante.setBounds(370, 80, 160, 20);
+
+        jTxtValidade.setToolTipText("exe: '07/03/2020'");
+        getContentPane().add(jTxtValidade);
+        jTxtValidade.setBounds(620, 80, 150, 20);
+        getContentPane().add(jTxtQuantidade);
+        jTxtQuantidade.setBounds(100, 120, 160, 20);
+        getContentPane().add(jTxtPrecoUnitario);
+        jTxtPrecoUnitario.setBounds(370, 120, 160, 20);
+
+        btnCadastrar.setText("Cadastrar");
+        btnCadastrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCadastrarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnCadastrar);
+        btnCadastrar.setBounds(620, 120, 150, 23);
+
+        lblListaDeProdutos.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        lblListaDeProdutos.setText("Lista de Produtos");
+        getContentPane().add(lblListaDeProdutos);
+        lblListaDeProdutos.setBounds(320, 210, 170, 22);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -112,9 +171,59 @@ public class jfrmListaSocios extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        new CadastroProdutos().setVisible(true);
-    }//GEN-LAST:event_jButton3ActionPerformed
+    private void jComboBoxOrdenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBoxOrdenaActionPerformed
+        if (jComboBoxOrdena.getSelectedItem().equals("Data de Validade")) {
+            ordenarPorDataValidade();
+        } else if (jComboBoxOrdena.getSelectedItem().equals("Nome")) {
+            preencherTabelaProdutosOrdenAlf();
+        } else if (jComboBoxOrdena.getSelectedItem().equals("Quantidade")) {
+            ordenarPorQuantidade();
+        }
+    }//GEN-LAST:event_jComboBoxOrdenaActionPerformed
+
+    private void btnCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCadastrarActionPerformed
+        //        LimparTodosCampos lp = new LimparTodosCampos();
+//        lp.limpar(rootPane);
+
+
+
+            PreparedStatement ps = null;
+            try {
+                
+                Conexao.conectar();
+                          
+                
+                String sqlInsertProduto = "INSERT INTO PRODUTO"
+                        + "(PRO_ID, PRO_FABRICANTE,"
+                        + " PRO_DT_VALIDADE, PRO_NOME, PRO_QUANTIDADE,"
+                        + " PRO_PRECO_UNITARIO)VALUES"
+                        + "(SEQ_PRODUTO.NEXTVAL,'"+jTxtNomeFabricante.getText()+"','"+jTxtValidade.getText()+"','"+jtxtNomeProduto.getText()+"','"+jTxtQuantidade.getText()+"','"+jTxtPrecoUnitario.getText()+"')";
+                
+
+                ps = Conexao.con.prepareStatement(sqlInsertProduto);
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null, "Produto cadastrado com sucesso!");
+                limpar.limpar(rootPane);
+                preencherTabelaProdutos();
+                //capturarCodigo();
+
+//                new CadastroDependentes().codSocio = Integer.parseInt(CampoCod.getText());
+            } catch (SQLException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } catch (ClassNotFoundException ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage());
+            } finally {
+                try {
+                    Conexao.con.close();
+                    ps.close();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        
+    }//GEN-LAST:event_btnCadastrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -159,33 +268,67 @@ public class jfrmListaSocios extends javax.swing.JFrame {
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCadastrar;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBoxOrdena;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTxtNomeFabricante;
+    private javax.swing.JTextField jTxtPrecoUnitario;
+    private javax.swing.JTextField jTxtQuantidade;
+    private javax.swing.JTextField jTxtValidade;
     private javax.swing.JButton jbtnVoltar;
+    private javax.swing.JTextField jtxtNomeProduto;
+    private javax.swing.JLabel lblListaDeProdutos;
     // End of variables declaration//GEN-END:variables
 
     public void preencherTabelaProdutosOrdenAlf() {
         try {
-            conexao.Conectar();
+            Conexao.conectar();
 
             String sqlSelect = "select * from produto order by PRO_NOME";
 
-            PreparedStatement ps = conexao.con.prepareStatement(sqlSelect);
+            PreparedStatement ps = Conexao.con.prepareStatement(sqlSelect);
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel mod = (DefaultTableModel) jTable1.getModel();
             mod.setNumRows(0);
             while (rs.next()) {
 
-                mod.addRow(new Object[]{rs.getString("PRO_ID"), rs.getString("PRO_FABRICANTE"), rs.getString("PRO_DT_VALIDADE"),
-                    rs.getString("PRO_NOME")});
+                mod.addRow(new Object[]{rs.getString("PRO_ID"), rs.getString("PRO_NOME"), rs.getString("PRO_FABRICANTE"),
+                    rs.getString("PRO_DT_VALIDADE"), rs.getString("PRO_QUANTIDADE"), rs.getString("PRO_PRECO_UNITARIO")});
 
             }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
 
+    public void ordenarPorDataValidade() {
+        try {
+            Conexao.conectar();
+
+            String sqlSelect = "select * from produto order by PRO_DT_VALIDADE";
+
+            PreparedStatement ps = Conexao.con.prepareStatement(sqlSelect);
+            ResultSet rs = ps.executeQuery();
+
+            DefaultTableModel mod = (DefaultTableModel) jTable1.getModel();
+            mod.setNumRows(0);
+            while (rs.next()) {
+
+                mod.addRow(new Object[]{rs.getString("PRO_ID"), rs.getString("PRO_NOME"), rs.getString("PRO_FABRICANTE"),
+                    rs.getString("PRO_DT_VALIDADE"), rs.getString("PRO_QUANTIDADE"), rs.getString("PRO_PRECO_UNITARIO")});
+            }
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         } catch (ClassNotFoundException ex) {
@@ -193,22 +336,44 @@ public class jfrmListaSocios extends javax.swing.JFrame {
         }
     }
     
-    public void preencherTabelaProdutos() {
+       public void ordenarPorQuantidade() {
         try {
-            conexao.Conectar();
+            Conexao.conectar();
 
-            String sqlSelect = "select * from produto";
+            String sqlSelect = "select * from produto order by PRO_QUANTIDADE";
 
-            PreparedStatement ps = conexao.con.prepareStatement(sqlSelect);
+            PreparedStatement ps = Conexao.con.prepareStatement(sqlSelect);
             ResultSet rs = ps.executeQuery();
 
             DefaultTableModel mod = (DefaultTableModel) jTable1.getModel();
             mod.setNumRows(0);
             while (rs.next()) {
 
-                mod.addRow(new Object[]{rs.getString("PRO_ID"), rs.getString("PRO_FABRICANTE"), rs.getString("PRO_DT_VALIDADE"),
-                    rs.getString("PRO_NOME")});
+                mod.addRow(new Object[]{rs.getString("PRO_ID"), rs.getString("PRO_NOME"), rs.getString("PRO_FABRICANTE"),
+                    rs.getString("PRO_DT_VALIDADE"), rs.getString("PRO_QUANTIDADE"), rs.getString("PRO_PRECO_UNITARIO")});
+            }
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
 
+    public void preencherTabelaProdutos() {
+        try {
+            Conexao.conectar();
+
+            String sqlSelect = "select * from produto";
+
+            PreparedStatement ps = Conexao.con.prepareStatement(sqlSelect);
+            ResultSet rs = ps.executeQuery();
+
+            DefaultTableModel mod = (DefaultTableModel) jTable1.getModel();
+            mod.setNumRows(0);
+            while (rs.next()) {
+
+                mod.addRow(new Object[]{rs.getString("PRO_ID"), rs.getString("PRO_NOME"), rs.getString("PRO_FABRICANTE"),
+                    rs.getString("PRO_DT_VALIDADE"), rs.getString("PRO_QUANTIDADE"), rs.getString("PRO_PRECO_UNITARIO")});
             }
 
         } catch (SQLException ex) {
@@ -217,5 +382,4 @@ public class jfrmListaSocios extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null, ex.getMessage());
         }
     }
-
 }

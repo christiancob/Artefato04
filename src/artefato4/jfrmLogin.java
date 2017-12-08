@@ -134,13 +134,13 @@ public class jfrmLogin extends javax.swing.JFrame {
             PreparedStatement ps = null;
             try {
                 //pega conexão
-                conexao.Conectar();
+                Conexao.conectar();
 
                 //criar uma variavel para selecionar os dados da tabela(sqlSelect)
                 String sqlSelect = "select * from FUNCIONARIO where FUN_CPF ='"
                         + jtxtCPF.getText() + "'and FUN_CPF='" + jTextSenha.getText() + "'";
                 //executa uma select
-                ps = conexao.con.prepareStatement(sqlSelect);
+                ps = Conexao.con.prepareStatement(sqlSelect);
                 //rs é variavel que armazenou todo o resultado (resultSet)
                 ResultSet rs = ps.executeQuery(sqlSelect);
                                
@@ -178,7 +178,7 @@ public class jfrmLogin extends javax.swing.JFrame {
             finally{
                 //fexando a conecxão
                 try{
-                    conexao.con.close();
+                    Conexao.con.close();
                     ps.close();
                 }catch (Exception e){
                     e.printStackTrace();

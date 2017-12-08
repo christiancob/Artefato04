@@ -6,13 +6,13 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 
-public class conexao {
-   public conexao(){
+public class Conexao {
+   public Conexao(){
        
    } 
    public static Connection con = null;
    
-   public static void Conectar()throws SQLException, ClassNotFoundException{
+   public static void conectar()throws SQLException, ClassNotFoundException{
     try{
     Class.forName("oracle.jdbc.OracleDriver");   
     con = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","USER_BD_ARTEFATO03","ALUNO");

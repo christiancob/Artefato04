@@ -14,6 +14,8 @@ import javax.swing.JOptionPane;
  * @author Aluno
  */
 public class CadastroFuncionario extends javax.swing.JFrame {
+    
+   
 
     /**
      * Creates new form CadastroFuncionario
@@ -322,7 +324,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         } else {
             PreparedStatement ps = null;
             try {
-                conexao.Conectar();
+                Conexao.conectar();
                 String SqlInsertPessoa = "INSERT INTO tabela_pessoa( pes_CPF,pes_Nome, pes_data_nascimento, "
                         + " pes_RG, pes_Telefone,pes_log_rua,pes_complemento,pes_log_UF,"
                         + "pes_log_bairro,pes_log_CEP,pes_cidade,pes_EstadoCivil,pes_sexo)VALUES"
@@ -347,10 +349,10 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                         + "','" + jPasswordField1.getText()
                         + "')";
 
-                ps = conexao.con.prepareStatement(SqlInsertPessoa);
+                ps = Conexao.con.prepareStatement(SqlInsertPessoa);
                 ps.executeUpdate();
 
-                ps = conexao.con.prepareStatement(SqlInsertSocio);
+                ps = Conexao.con.prepareStatement(SqlInsertSocio);
                 ps.executeUpdate();
                 JOptionPane.showMessageDialog(null, "Funcionário cadastrado com sucesso!");
                 limpar.limpar(rootPane);
@@ -363,7 +365,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(this, ex.getMessage());
             } finally {
                 try {
-                    conexao.con.close();
+                    Conexao.con.close();
                     ps.close();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -383,9 +385,9 @@ public class CadastroFuncionario extends javax.swing.JFrame {
         PreparedStatement ps = null;
         int cod = 0;
         try {
-            conexao.Conectar();
+            Conexao.conectar();
             String sql = "SELECT Max(codFuncionario) FROM tabela_funcionario;";
-            ps = conexao.con.prepareStatement(sql);
+            ps = Conexao.con.prepareStatement(sql);
 
             ResultSet rs = ps.executeQuery(sql);
             if (rs.next()) {
@@ -403,7 +405,7 @@ public class CadastroFuncionario extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex.getMessage());
         } finally {
             try {
-                conexao.con.close();
+                Conexao.con.close();
                 ps.close();
             } catch (Exception e) {
                 e.printStackTrace();
